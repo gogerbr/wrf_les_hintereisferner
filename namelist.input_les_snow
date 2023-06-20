@@ -1,0 +1,170 @@
+ &time_control
+ run_days                            = 1,
+ run_hours                           = 0,  
+ run_minutes                         = 00,
+ run_seconds                         = 0,
+ start_year                          = 2021,2021,2021,2021,2020,
+ start_month                         = 02,02,02,02,11,11,
+ start_day                           = 08, 08, 06, 06, 05,
+ start_hour                          = 00,00,00,00,
+ start_minute                        = 00, 00, 00, 00, 00,
+ start_second                        = 00, 00, 00, 00, 00,
+ end_year                            = 2021,2021,2021,2021,2020,
+ end_month                           = 02, 02, 02, 02, 11,
+ end_day                             = 09,09,08,08,  !long run 06, short 02
+ end_hour                            = 00, 00, 00, 00, 21,  !long run 00, short 18
+ end_minute                          = 00, 00, 00, 00, 00,
+ end_second                          = 00, 00, 00, 00, 00,
+ history_interval                    = 15,15,
+! history_interval_m                  = 1,1,
+ frames_per_outfile                  = 1,1,
+ restart                             = .false.,
+ restart_interval                    = 180,
+ io_form_history                     = 2
+ io_form_restart                     = 2
+ io_form_input                       = 2
+ debug_level                         = 1000
+ frames_per_auxhist8                 = 1, 1,
+ io_form_auxhist8                    = 2,
+ debug_level                         = 0,
+ iofields_filename                   = "LES_IO.txt", "LES_IO.txt",
+ ignore_iofields_warning             = .true.,
+ auxhist8_outname                    = "/gpfs/data/fs71661/goger4/output/les_snow/meanout_subl_d<domain>_<date>",
+ auxhist8_interval                   = 15,15,
+ auxhist3_interval = 1,1,
+ auxhist3_outname                    = "/gpfs/data/fs71661/goger4/output/les_snow/fastout_subl_d<domain>_<date>",
+ frames_per_auxhist3 = 1000, 1000,
+ io_form_auxhist3 = 2,
+ history_outname = '/gpfs/data/fs71661/goger4/output/les_snow/wrfout_les_subl_d<domain>_<date>',
+ rst_outname = '/gpfs/data/fs71661/goger4/output/les_snow/wrfrst_subl_d<domain>_<date>',
+
+/
+
+ &domains
+ time_step                           = 1,
+ time_step_fract_num                 = 2,
+ time_step_fract_den                 = 10,
+ max_dom                             = 2,
+ e_we                                = 246, 251
+ e_sn                                = 246, 251
+ e_vert                              = 86,86
+ p_top_requested                     = 5000,
+ eta_levels                          = 1.000000,0.998140,0.996098,0.993855,0.991392,0.988689,0.985722,0.982466,0.978895,0.974978,0.970683,0.965977,0.960820,0.955173,0.948991,0.942227,0.934830,0.926746,0.917917,0.908281,0.897772,0.886323,0.873860,0.860308,0.845590,0.829626,0.812336,0.793640,0.773458,0.751716,0.728343,0.703278,0.676470,0.649366,0.623089,0.597618,0.572932,0.549011,0.525836,0.503387,0.481646,0.460595,0.440215,0.420489,0.401399,0.382930,0.365064,0.347785,0.331079,0.314928,0.299319,0.284237,0.269668,0.255596,0.242009,0.228894,0.216236,0.204024,0.192245,0.180886,0.169936,0.159382,0.149215,0.139421,0.129992,0.120915,0.112180,0.103779,0.095699,0.087933,0.080482,0.073335,0.066482,0.059914,0.053620,0.047592,0.041819,0.036293,0.031006,0.025949,0.021114,0.016493,0.012079,0.007863,0.003839,0.000000,
+ num_metgrid_levels                  = 38,
+ num_metgrid_soil_levels             = 4,
+ dx                                  = 240,48,
+ dy                                  = 240,48,
+ grid_id                             = 1, 2, 
+ parent_id                           = 1,1,  
+ i_parent_start                      = 1,96, 
+ j_parent_start                      = 1,96,
+ parent_grid_ratio                   = 1,5,  
+ parent_time_step_ratio              = 5,
+ feedback                            = 0,
+ smooth_option                       = 0,  !vorher 0
+ smooth_cg_topo=.true.,
+ /
+
+ &physics
+ mp_physics                          = 8,8,8,8, !Morrison
+ ra_lw_physics                       = 4,4,4,4,4,
+ ra_sw_physics                       = 4, 4, 4, 4,4,    !RRTMG 4
+ topo_shading                        = 1, 1, 1, 1,1, !vorher nur d4 =1
+ slope_rad                           = 1, 1, 1, 1,1, !vorher null
+ radt                                = 5., 5., 5., 5.,5.,    !vorher 15
+ sf_sfclay_physics                   = 1,1,
+ sf_surface_physics                  = 4,4,4,4,4,     !noah_mp
+ ua_phys                             = .true.,
+ bl_pbl_physics                      = 0,0,     !MYNN 2.5 level TKE scheme(5), MYNN Level 3 PBL(6)
+ bldt                                = 0, 0, 0, 0,0,     !bl is called every time step
+ cu_physics                          = 0, 0, 0,0,     !Kain-Fritsch 1(d1/2)and no cumulus (for res less than 10km)
+ cudt                                = 0, 0, 0,0,     !d1/2  5 for Kain_Fritsch
+ isfflx                              = 1,  !heat/moisture fluxes are on
+ ifsnow                              = 0,  !turned off because sf_sfclay_physics .ne. 1
+ icloud                              = 0,  !cloud effect turnd off, default would be 1
+ surface_input_source                = 3,
+ num_land_cat                        = 25,             
+ num_soil_layers                     = 3,              !4 for Noah
+ sst_update                          = 0,
+ cu_rad_feedback  		     = .false.,.false.,.false.,.false.,  !sub-grid cloud effect
+ snow_opt= 1, 1,  !turn on (1) snow_opt for every domain! 
+ er_opt= 1,1,  !turn erosion on (1), for domains where snowdrift is calculated 
+ subl_opt= 2,2,  !turn on sublimation with feedback (2) or without feedback (1) 
+ dep_opt= 1,1,  !turn on deposition (1) 
+ ustlim= 1.5,1.5,  !set a limit for ustar, if needed (and er_opt =1) 
+ rgro= 5E-2,5E-2, !set ground particle radius 
+ esalt= 5E-4,5E-4,  !set saltation coefficient, default 5E-4 
+ pavel= 0.2, 0.2, !set a constant settling velocity
+ 
+ /
+
+ &dynamics
+
+ w_damping=1,
+ rk_ord                              = 3, !defaulta
+ diff_opt                            = 2,     2,
+ km_opt                              = 2,     2, 
+ diff_6th_opt                        = 0,     0,
+ diff_6th_factor                     = 0.12,  0.12, 
+ base_temp                           = 290.	
+ damp_opt                            = 3,	
+ zdamp                               = 8000.,	
+ dampcoef                            = 0.2,	
+ khdif                               = 0,     0,	    
+ kvdif                               = 0,     0,	    
+ non_hydrostatic                     = .true., .true.,	    
+ moist_adv_opt                       = 1,     1,	    
+ use_theta_m                         = 1,		      
+ use_q_diabatic                      = 0,		     
+ time_step_sound                     = 6,		      
+ m_opt                               = 1,     1,	      
+ epssm                               = 0.9,   0.9,	      
+ smdiv                               = 0.1,   0.2,	      
+ emdiv                               = 0.01,  0.02,	      
+ sfs_opt                             = 0,     0,	      
+ use_input_w                         = .false.,		      
+ c_k                                 = 0.08,		      
+ do_avgflx_em                        = 0,1, 	      
+ mix_isotropic                       = 1,1,	      
+ les_lscale                          = 2,
+ mix_full_fields		     = .true.,
+
+ &bdy_control
+ spec_bdy_width                      = 10, 
+ spec_zone                           = 1,
+ relax_zone                          = 9,
+ specified                           = .true.,.false.,.false.,.false.,.false.,
+ nested                              = .false.,.true.,.true.,.true.,.false.,
+ /
+
+ &grib2
+ /
+
+ &chem
+ chem_opt                            = 0, 0, 0, 0,
+ emiss_opt                           = 0, 0, 0, 0,
+ chem_in_opt                         = 0, 0, 0, 0,
+ phot_opt                            = 0, 0, 0, 0,
+ gas_drydep_opt                      = 0, 0, 0, 0,
+ aer_drydep_opt                      = 0, 0, 0, 0,
+ bio_emiss_opt                       = 0, 0, 0, 0,
+ gas_bc_opt                          = 0, 0, 0, 0,
+ gas_ic_opt                          = 0, 0, 0, 0,
+ aer_bc_opt                          = 0, 0, 0, 0,
+ aer_ic_opt                          = 0, 0, 0, 0,
+ gaschem_onoff                       = 0, 0, 0, 0,
+ aerchem_onoff                       = 0, 0, 0, 0,
+ wetscav_onoff                       = 0, 0, 0, 0,
+ cldchem_onoff                       = 0, 0, 0, 0,
+ vertmix_onoff                       = 0, 0, 0, 0,
+ chem_conv_tr                        = 0, 0, 0, 0,
+! snow_opt                            = 1,1, 0, 0,
+ biomass_burn_opt                    = 0, 0, 0, 0,
+ aer_ra_feedback                     = 0, 0, 0, 0,
+/
+
+ &namelist_quilt
+ nio_tasks_per_group = 0,
+ nio_groups = 1,
+ /
+
