@@ -8,4 +8,5 @@ WRF namelists to perform LES over an Alpine glacier
   - Voordendag, Goger, et al (2024): https://doi.org/10.5194/tc-18-849-2024
   - Saigger et al (2024): https://doi.org/10.1029/2023MS004007
   - Goger et al (2024):  https://doi.org/10.5194/egusphere-2024-2634
+  - Goger et al (2025): https://doi.org/10.5194/wcd-6-345-2025 
   
