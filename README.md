@@ -10,4 +10,4 @@ WRF namelists to perform LES over an Alpine glacier
   - Saigger et al (2024): https://doi.org/10.1029/2023MS004007
   - Goger et al (2025): https://doi.org/10.5194/wcd-6-345-2025
   - Sauter et al (2026): https://doi.org/10.1029/2024RG000869
-  
+  - Saigger et al (2026): https://doi.org/10.5194/egusphere-2025-5608 
